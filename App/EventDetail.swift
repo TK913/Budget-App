@@ -77,8 +77,8 @@ struct EventDetail: View {
     }
 }
 
-struct EventDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        EventDetail(event: .constant(Event.example), isEditing: true)
-    }
-}
+//struct EventDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EventDetail(event: .constant(Event.example), isEditing: true)
+//    }
+//}
