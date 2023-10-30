@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "/home/lilly/Documents/sqlite-amalgamation-3430200/sqlite3.h"
+#include "sqlite-amalgamation-3430200/sqlite3.h"
 
 using namespace std;
 
