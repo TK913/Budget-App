@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 #include "sqlite-amalgamation-3430200/sqlite3.h"
 
@@ -23,7 +24,7 @@ class DBManager
 
         //takes a username and pass word
         //and returns if the two match
-        bool CheckPassword(string UserName, string PassWord)
+        bool CheckPassword(string UserName, string Password)
         {
             return false;
         }
