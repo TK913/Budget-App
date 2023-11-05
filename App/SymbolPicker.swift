@@ -72,8 +72,8 @@ struct SymbolPicker: View {
     }
 }
 
-struct SFSymbolBrowser_Previews: PreviewProvider {
-    static var previews: some View {
-        SymbolPicker(event: .constant(Event.example))
-    }
-}
+//struct SFSymbolBrowser_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SymbolPicker(event: .constant(Event.example))
+//    }
+//}

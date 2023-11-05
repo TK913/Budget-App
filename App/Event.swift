@@ -36,15 +36,15 @@ struct Event: Identifiable, Hashable {
         date >= Date().thirtyDaysOut
     }
 
-    static var example = Event(
-        symbol: "case.fill",
-        title: "Sayulita Trip",
-        tasks: [
-            EventTask(text: "Buy plane tickets"),
-            EventTask(text: "Get a new bathing suit"),
-            EventTask(text: "Find an airbnb"),
-        ],
-        date: Date(timeIntervalSinceNow: 60 * 60 * 24 * 365 * 1.5))
+//    static var example = Event(
+//        symbol: "case.fill",
+//        title: "Sayulita Trip",
+//        tasks: [
+//            EventTask(text: "Buy plane tickets"),
+//            EventTask(text: "Get a new bathing suit"),
+//            EventTask(text: "Find an airbnb"),
+//        ],
+//        date: Date(timeIntervalSinceNow: 60 * 60 * 24 * 365 * 1.5))
 }
 
 // Convenience methods for dates.
