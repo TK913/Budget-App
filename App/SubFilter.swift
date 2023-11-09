@@ -11,12 +11,37 @@ struct SubFilter: View {
     @Binding var config: SubFilterConfig
     var body: some View {
         VStack{
-            Text("price")
+            Button
+            {
+
+            }label:{
+
+                Text("price")
+
+            }
+            Button{
+
+            }label:{
+    
             Text("A-Z")
+    
+            }
             HStack
             {
+                Button{
+
+                }label:{
+
                 Image(systemName: "arrowshape.down.fill")
+        
+                }
+                Button{
+    
+                }label:{    
+
                 Image(systemName: "arrowshape.up.fill")
+    
+                }
             }
             Button{
                 config.done()
