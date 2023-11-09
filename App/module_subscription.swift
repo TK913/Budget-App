@@ -34,6 +34,12 @@ struct module_subscription: View {
     }
 }
 
+struct Subscription_Previews: PreviewProvider {
+    static var previews: some View {
+        module_subscription()
+    }
+}
+
 ///#Preview {
     //SwiftUIView()
 ///}
