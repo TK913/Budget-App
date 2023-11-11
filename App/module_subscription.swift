@@ -10,12 +10,20 @@ import SwiftUI
 struct module_subscription: View {
     
     @State private var Subfilterconfig = SubFilterConfig()
-     private var Subscription_data = [["Amazon prime", 139,"annual"]
-                                     ["Disney+",139.99,"yearly"]
-                                     ["Netflix"15.49,"monthly"]  ]
+    
+    private struct SubScriptionData:Identifiable{
+        var id:String {name}
+        let name: String
+        let Cost: String
+        let Period: String
+        
+    }
+    @State public var Subscription_data = [SubScriptionData(name: "Amazon Prime", Cost: "139.00", Period: "yearly"),
+                                            SubScriptionData(name: " Disney+", Cost: "139.99", Period: "yearly"),
+                                            SubScriptionData(name: "Netflix", Cost: "15.49", Period: "monthly")]
     
     var body: some View {
-           SubList()
+           SubList(data: $Subscription_data)
            .toolbar{
             ToolbarItem{
                 Button{

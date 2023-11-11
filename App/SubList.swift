@@ -9,27 +9,29 @@ import SwiftUI
 
 struct SubList: View {
    
+    @Binding var data: [SubScriptionData]
+    
     var body: some View {
          
+        
+       
        ScrollView{
-            VStack{
-            //call to conntroller to get list of subscriptions from model
-            //for loop to display names, prices, and periods
-                for i in 0..<3{
+        ForEach(data){ i in
                     VStack{
                         Button{
-        
+                                print("Test")
                         }label: {
-                            Text(Subscription_data[i][0])
+                            Text(i.name)
                         }
-                        Text("Cost: $\(Subscription_data[i[1]])\t\t\tRenews: \(Subscription_data[i][2])")
+                        Text("Cost:" + i.cost + "\t\t\tRenews:" +  i.Period)
                     }
                     .border(.gray)
+                   
                 }
-            }.alignmentGuide(VerticalAlignment.top) { _ in 0 }
-             
-        }
+       }.alignmentGuide(VerticalAlignment.top) { _ in 0 }
             
     }
 }
+
+
 
