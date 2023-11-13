@@ -8,7 +8,6 @@ import SwiftUI
 //import SwiftData
 
 struct TipsView: View {
-    //@State private var username = ""
     
     var body: some View {
         NavigationView{
@@ -20,7 +19,9 @@ struct TipsView: View {
                 Button(action:{
                     print("Test")
                 }){
-                    Text("Getting Started")
+                    NavigationLink(destination: TipsBasicsView()) {
+                        Text("Budgeting Basics")
+                    }
                         .font(.title)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding()
@@ -46,7 +47,9 @@ struct TipsView: View {
                 Button(action:{
                     print("Test")
                 }){
-                    Text("About Saving")
+                    NavigationLink(destination: TipsSavingView()) {
+                        Text("About Saving")
+                    }
                         .font(.title)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding()
@@ -72,7 +75,9 @@ struct TipsView: View {
                 Button(action:{
                     print("Test")
                 }){
-                    Text("FAQ")
+                    NavigationLink(destination: TipsFAQView()) {
+                        Text("FAQ")
+                    }
                         .font(.title)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding()
