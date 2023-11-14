@@ -20,7 +20,7 @@ struct SubFilter: View {
 
             }
             Button{
-                print("test3"
+                print("test3")
             }label:{
     
             Text("A-Z")
