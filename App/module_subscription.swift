@@ -11,19 +11,9 @@ struct module_subscription: View {
     
     @State private var Subfilterconfig = SubFilterConfig()
     
-    private struct SubScriptionData:Identifiable{
-        var id:String {name}
-        let name: String
-        let Cost: String
-        let Period: String
-        
-    }
-    @State public var Subscription_data = [SubScriptionData(name: "Amazon Prime", Cost: "139.00", Period: "yearly"),
-                                            SubScriptionData(name: " Disney+", Cost: "139.99", Period: "yearly"),
-                                            SubScriptionData(name: "Netflix", Cost: "15.49", Period: "monthly")]
     
     var body: some View {
-           SubList(data: $Subscription_data)
+           SubList(data: $Subfilterconfig.Subscription_data)
            .toolbar{
             ToolbarItem{
                 Button{
