@@ -1,9 +1,9 @@
 //
 //
-//  
+//
 //
 //  Created by Ben Chittenden on 11/4/23.
-// 
+//
 
 import SwiftUI
 
@@ -11,12 +11,12 @@ struct module_subscription: View {
     
     @State private var Subfilterconfig = SubFilterConfig()
     
-    var Subscription_data = [SubScriptionData(name: "Amazon Prime", Cost: "139.00", Period: "yearly"),
+    public var Subscription_data = [SubScriptionData(name: "Amazon Prime", Cost: "139.00", Period: "yearly"),
                              SubScriptionData(name: " Disney+", Cost: "139.99", Period: "yearly"),
                              SubScriptionData(name: "Netflix", Cost: "15.49", Period: "monthly")]
     
     var body: some View {
-           SubList(data: $Subfilterconfig.Subscription_data)
+            SubList(data: Subscription_data)
            .toolbar{
             ToolbarItem{
                 Button{
@@ -36,12 +36,10 @@ struct module_subscription: View {
 
 struct SubList: View {
    
-    @Binding var data: [SubScriptionData]
+    var data: [SubScriptionData]
     
     var body: some View {
          
-        
-       
        ScrollView{
         ForEach(data){ i in
                     VStack{
