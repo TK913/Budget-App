@@ -11,12 +11,12 @@ struct module_subscription: View {
     
     @State private var Subfilterconfig = SubFilterConfig()
     
-    public var Subscription_data = [SubScriptionData(name: "Amazon Prime", Cost: "139.00", Period: "yearly"),
+    @State var Subscription_data = [SubScriptionData(name: "Amazon Prime", Cost: "139.00", Period: "yearly"),
                              SubScriptionData(name: " Disney+", Cost: "139.99", Period: "yearly"),
                              SubScriptionData(name: "Netflix", Cost: "15.49", Period: "monthly")]
     
     var body: some View {
-            SubList(data: Subscription_data)
+            SubList(data: $Subscription_data)
            .toolbar{
             ToolbarItem{
                 Button{
@@ -36,21 +36,13 @@ struct module_subscription: View {
 
 struct SubList: View {
    
-    var data: [SubScriptionData]
+    @Binding var data: [SubScriptionData]
     
     var body: some View {
          
        ScrollView{
         ForEach(data){ i in
-                    VStack{
-                        Button{
-                                print("Test")
-                        }label: {
-                            Text(i.name)
-                        }
-                        Text("Cost:" + i.cost + "\t\t\tRenews:" +  i.Period)
-                    }
-                    .border(.gray)
+                   OneSub($i)
                    
                 }
        }.alignmentGuide(VerticalAlignment.top) { _ in 0 }
@@ -58,6 +50,21 @@ struct SubList: View {
     }
 }
 
+struct OneSub:View {
+    @Binding var sub: SubScriptionData
+    var body: some View {
+             VStack{
+                        Button{
+                                print("Test")
+                        }label: {
+                            Text(sub.name)
+                        }
+                        Text("Cost:" + sub.cost + "\t\t\tRenews:" +  sub.Period)
+                    }
+                    .border(.gray)
+    }
+}
+    
 struct SubScriptionData:Identifiable{
         var id:String {name}
         let name: String
