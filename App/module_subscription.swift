@@ -36,7 +36,7 @@ struct module_subscription: View {
 
 struct SubList: View {
    
-    @Binding var data: [SubScriptionData]
+    @State @Binding var data: [SubScriptionData]
     
     var body: some View {
          
