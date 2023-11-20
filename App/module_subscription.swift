@@ -42,7 +42,7 @@ struct SubList: View {
          
        ScrollView{
         ForEach(data){ i in
-                   OneSub(i)
+                   OneSub(sub:i)
                    
                 }
        }.alignmentGuide(VerticalAlignment.top) { _ in 0 }
