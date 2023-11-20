@@ -36,13 +36,13 @@ struct module_subscription: View {
 
 struct SubList: View {
    
-    @State @Binding var data: [SubScriptionData]
+    @Binding var data: [SubScriptionData]
     
     var body: some View {
          
        ScrollView{
         ForEach(data){ i in
-                   OneSub($i)
+                   OneSub(i)
                    
                 }
        }.alignmentGuide(VerticalAlignment.top) { _ in 0 }
@@ -51,7 +51,7 @@ struct SubList: View {
 }
 
 struct OneSub:View {
-    @Binding var sub: SubScriptionData
+    var sub: SubScriptionData
     var body: some View {
              VStack{
                         Button{
@@ -59,7 +59,7 @@ struct OneSub:View {
                         }label: {
                             Text(sub.name)
                         }
-                        Text("Cost:" + sub.cost + "\t\t\tRenews:" +  sub.Period)
+                        Text("Cost:" + sub.Cost + "\t\t\tRenews:" +  sub.Period)
                     }
                     .border(.gray)
     }
