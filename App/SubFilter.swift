@@ -1,6 +1,6 @@
 //
-//  
-//  
+//
+//
 //
 //  Created by Ben Chittenden on 11/4/23.
 //
@@ -20,7 +20,7 @@ struct SubFilter: View {
 
             }
             Button{
-                print("test3"
+                print("test3")
             }label:{
     
             Text("A-Z")
@@ -37,7 +37,7 @@ struct SubFilter: View {
                 }
                 Button{
                     print("test5")
-                }label:{    
+                }label:{
 
                 Image(systemName: "arrowshape.up.fill")
     
@@ -51,4 +51,3 @@ struct SubFilter: View {
         }
     }
 }
-
