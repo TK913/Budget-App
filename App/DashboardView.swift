@@ -1,13 +1,20 @@
+//
+//  DashboardView.swift
+//  Budgeting
+//
+//  Created by Niyati Sanghrajka on 10/27/23.
+//
+
 import SwiftUI
+import SQLite3
 
 struct DashboardView: View {
-    var totalBalance: Double = 4076.56
-    var allocatedToSavings: Double = 1000
-    var allocatedToSubscriptions: Double = 1000
+    @State private var totalBalance: Double = getIncome(userID)
 
+    private let databaseManager = DatabaseManager()
     var body: some View {
         VStack {
-            Text("Welcome back, Niyati")
+            Text("Welcome back!")
                 .font(.largeTitle)
                 .padding(.top, 20)
             
@@ -20,7 +27,7 @@ struct DashboardView: View {
                         Text("Your Balance")
                             .font(.callout)
                             .foregroundColor(.white)
-                        Text("$\(totalBalance, specifier: "%.2f")") // Display balance with 2 decimal places
+                        Text("$\(totalBalance, specifier: "%.2f")")
                             .font(.largeTitle)
                             .foregroundColor(.white)
                     }
@@ -37,7 +44,7 @@ struct DashboardView: View {
                 DashboardButton(label: "Subscriptions")
             }
             
-            NavigationLink(destination: ExpensesView()) {
+            NavigationLink(destination: ExpenseView()) {
                 DashboardButton(label: "Expenses")
             }
             
@@ -46,8 +53,11 @@ struct DashboardView: View {
                 DashboardButton(label: "Tips")
             }
             
-            NavigationLink(destination: MyAccountView()) {
+            NavigationLink(destination: AccountInfoView()) {
                 DashboardButton(label: "My Account")
+            }
+            
+            .onAppear {
             }
             
             Spacer()
@@ -67,20 +77,6 @@ struct DashboardButton: View {
             .cornerRadius(10)
             .padding(.horizontal)
             .padding(.vertical, 5)
-    }
-}
-
-
-struct ExpensesView: View {
-    var body: some View {
-        Text("Expenses View")
-    }
-}
-
-
-struct MyAccountView: View {
-    var body: some View {
-        Text("My Account View")
     }
 }
 
