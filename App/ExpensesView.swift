@@ -4,85 +4,105 @@
 //
 //  Created by Niyati Sanghrajka on 11/27/23.
 //
-
 import SwiftUI
-import SwiftData
 
 struct ExpenseView: View {
-    @State private var totalAmount: Double = 1300
+    @State private var income: Double = getIncome(userID)
+    @State private var totalSpent: Double = 0
     @State private var expenses: [Expense] = []
-    
+
     @State private var isAddingExpense = false
     @State private var newExpenseTitle = ""
     @State private var newExpenseTotalAmount = ""
-    
+    @State private var selectedCategory = "Housing"
+
+    var categories = ["Housing", "Transportation", "Food", "Utilities", "Healthcare", "Savings", "Personal", "Entertainment", "Other"]
+
     var body: some View {
         VStack {
             Text("EXPENSES")
                 .font(.body)
-            Text("You spent: $\(totalAmount, specifier: "%.2f")")
+
+            Text("You Spent: $\(totalSpent, specifier: "%.2f")")
                 .font(.title)
                 .padding(.top, 20)
-            
+
             ZStack {
                 Circle()
                     .stroke(lineWidth: 10)
                     .opacity(0.3)
                     .foregroundColor(.gray)
-                
+                Circle()
+                    .trim(from: 0.0, to: CGFloat(min(totalSpent / income, 1.0)))
+                    .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                    .foregroundColor(Color.blue)
+                    .rotationEffect(.degrees(-90))
             }
             .frame(width: 150, height: 150)
-            
+
             ForEach(expenses.indices, id: \.self) { index in
                 ExpenseListView(expense: $expenses[index])
             }
-            
-            // New goal creation box
+
             if isAddingExpense {
-                HStack {
+                VStack {
                     TextField("New Expense Title", text: $newExpenseTitle)
                         .padding()
                         .background(Color.blue.opacity(0.1))
                         .cornerRadius(10)
                         .padding(.horizontal)
-                    
+
                     TextField("Total Amount", text: $newExpenseTotalAmount)
                         .padding()
                         .background(Color.blue.opacity(0.1))
                         .cornerRadius(10)
                         .padding(.horizontal)
-                    
-                    Button(action: {
-                        // Save the new goal
-                        if let totalAmount = Double(newExpenseTotalAmount) {
-                            expenses.append(Expense(title: newExpenseTitle, totalAmount: Double(newExpenseTotalAmount)!, category: <#String#>))
-                                            isAddingExpense = false,
-                                            newExpenseTitle = "",
-                            newExpenseTotalAmount = ""
+
+                    Picker("Category", selection: $selectedCategory) {
+                        ForEach(categories, id: \.self) { category in
+                            Text(category)
                         }
-                    }) {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.green)
-                            .padding()
                     }
-                    
-                    Button(action: {
-                        // Cancel adding a new goal
-                        isAddingExpense = false
-                        newExpenseTitle = ""
-                        newExpenseTotalAmount = ""
-                    }) {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.red)
-                            .padding()
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
+
+                    HStack {
+                        Button(action: {
+                            if let totalAmount = Double(newExpenseTotalAmount) {
+                                let newExpense = Expense(title: newExpenseTitle, totalAmount: totalAmount, category: selectedCategory)
+                                expenses.append(newExpense)
+                                totalSpent += totalAmount
+
+                                let databaseManager = DatabaseManager()
+                                databaseManager.insertNewExpense(price: totalAmount, category: selectedCategory, userID: 1)
+
+                                isAddingExpense = false
+                                newExpenseTitle = ""
+                                newExpenseTotalAmount = ""
+                                selectedCategory = "Housing"
+                            }
+                        }) {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.green)
+                                .padding()
+                        }
+
+                        Button(action: {
+                            isAddingExpense = false
+                            newExpenseTitle = ""
+                            newExpenseTotalAmount = ""
+                            selectedCategory = "Housing"
+                        }) {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.red)
+                                .padding()
+                        }
                     }
                 }
                 .background(Color.blue.opacity(0.2))
                 .cornerRadius(10)
                 .padding()
             }
-            
-            // Button to toggle the new goal creation box
             Button(action: {
                 isAddingExpense.toggle()
             }) {
@@ -96,19 +116,20 @@ struct ExpenseView: View {
         }
     }
 }
+
 struct ExpenseListView: View {
     @Binding var expense: Expense
-    
+
     var body: some View {
         VStack {
             HStack {
                 Text(expense.title)
                     .font(.headline)
+
                 Text(expense.category)
                     .font(.caption)
+
                 Spacer()
-                //Text("$\(expense.totalAmount, specifier: "%.2f"))
-                    //.font(.subheadline)
             }
         }
         .padding(10)
@@ -122,7 +143,9 @@ struct Expense: Identifiable {
     var category: String
 }
 
-#Preview {
-    ExpensesView()
+struct ExpensesView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExpenseView()
+    }
 }
 
